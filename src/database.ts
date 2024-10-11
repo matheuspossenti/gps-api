@@ -1,9 +1,10 @@
 import { knex as setupKnex, Knex } from 'knex'
+import { env } from './env'
 
 export const config: Knex.Config = {
   client: 'sqlite',
   connection: {
-    filename: './db/app.db',
+    filename: env.DATABASE_URL,
   },
   useNullAsDefault: true,
   migrations: {
@@ -11,7 +12,7 @@ export const config: Knex.Config = {
     directory: './db/migrations',
   },
   pool: {
-    afterCreate: (conn, done) => {
+    afterCreate: (conn: any, done: Function) => {
       conn.run('PRAGMA foreign_keys = ON', done)
     },
   },

@@ -46,14 +46,12 @@ export async function driverRoutes(app: FastifyInstance) {
           tagAccess: yup.string().optional(),
         })
 
-        const { uuid } = request.params
-        const { name, tagAccess } = request.body
-
-        await updateDriverBodySchema.validate({
-          uuid,
-          name,
-          tagAccess,
-        })
+        const { uuid, name, tagAccess } = await updateDriverBodySchema.validate(
+          {
+            uuid: request.params.uuid,
+            ...request.body,
+          },
+        )
 
         const [driver] = await knex('drivers')
           .where({ uuid })

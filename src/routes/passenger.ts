@@ -1,4 +1,4 @@
-import type { FastifyInstance } from 'fastify'
+import type { FastifyInstance, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { knex } from '../database'
 import { randomUUID } from 'crypto'
@@ -39,5 +39,70 @@ export async function passengerRoutes(app: FastifyInstance) {
       .returning('*')
 
     return reply.status(201).send(passenger)
+  })
+
+  app.put(
+    '/:uuid',
+    async (
+      request: FastifyRequest<{
+        Params: { uuid: string }
+        Body: {
+          name: string
+          tagAccess: string
+          biometryTemplate1: string
+          biometryTemplate2: string
+          biometryTemplate3: string
+        }
+      }>,
+      reply,
+    ) => {
+      const updatePassengerBodySchema = yup.object({
+        uuid: yup.string().uuid().required(),
+        name: yup.string().optional(),
+        tagAccess: yup.string().optional(),
+        biometryTemplate1: yup.string().optional(),
+        biometryTemplate2: yup.string().optional(),
+        biometryTemplate3: yup.string().optional(),
+      })
+
+      const {
+        uuid,
+        name,
+        tagAccess,
+        biometryTemplate1,
+        biometryTemplate2,
+        biometryTemplate3,
+      } = await updatePassengerBodySchema.validate({
+        uuid: request.params.uuid,
+        ...request.body,
+      })
+
+      const [passenger] = await knex('passengers')
+        .where({ uuid })
+        .update({
+          name,
+          tagAccess,
+          biometryTemplate1,
+          biometryTemplate2,
+          biometryTemplate3,
+        })
+        .returning('*')
+
+      return reply.status(200).send(passenger)
+    },
+  )
+
+  app.delete('/:uuid', async (request, reply) => {
+    const deletePassengerBodySchema = yup.object({
+      uuid: yup.string().uuid().required(),
+    })
+
+    const { uuid } = await deletePassengerBodySchema.validate(request.params)
+
+    await knex('passengers').where({ uuid }).update({
+      deletedAt: knex.fn.now(),
+    })
+
+    return reply.status(204).send()
   })
 }
