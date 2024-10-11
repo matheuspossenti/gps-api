@@ -10,6 +10,11 @@ export const config: Knex.Config = {
     extension: 'ts',
     directory: './db/migrations',
   },
+  pool: {
+    afterCreate: (conn, done) => {
+      conn.run('PRAGMA foreign_keys = ON', done)
+    },
+  },
 }
 
 export const knex = setupKnex(config)
