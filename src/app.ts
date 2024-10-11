@@ -2,6 +2,8 @@ import fastify from 'fastify'
 import { driverRoutes } from './routes/driver'
 import { coordinateRoutes } from './routes/coordinate'
 import { vehicleRoutes } from './routes/vehicle'
+import { accessRoutes } from './routes/access'
+import { passengerRoutes } from './routes/passenger'
 
 export const app = fastify()
 
@@ -15,4 +17,12 @@ app.register(vehicleRoutes, {
 
 app.register(coordinateRoutes, {
   prefix: 'coordinate',
+})
+
+app.register(accessRoutes, {
+  prefix: 'access',
+})
+
+app.register(passengerRoutes, {
+  prefix: 'passenger',
 })
