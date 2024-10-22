@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { KnexVehicleRepository } from '../../../repositories/knex/knex-vehicle-repository'
-import { GetVehiclesUseCase } from '../../../use-cases/vehicle/get-vehicles'
+import { GetVehiclesUseCase } from '../../../use-cases/vehicles/get-vehicles'
 
 export async function showAll(
   request: FastifyRequest,
