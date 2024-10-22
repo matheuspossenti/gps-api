@@ -1,0 +1,19 @@
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import { KnexVehicleRepository } from '../../../repositories/knex/knex-vehicle-repository'
+import { GetVehicleByIdUseCase } from '../../../use-cases/vehicle/get-vehicle-by-id'
+import * as yup from 'yup'
+
+export async function showByUuid(request: FastifyRequest, reply: FastifyReply) {
+  const getVehicleByUuidParamsSchema = yup.object({
+    uuid: yup.string().required().uuid('Não é um ID válido'),
+  })
+
+  const { uuid } = await getVehicleByUuidParamsSchema.validate(request.params)
+
+  const vehicleRepository = new KnexVehicleRepository()
+  const getVehiclesUseCase = new GetVehicleByIdUseCase(vehicleRepository)
+
+  const { vehicle } = await getVehiclesUseCase.execute({ uuid })
+
+  return reply.status(200).send(vehicle)
+}

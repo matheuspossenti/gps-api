@@ -5,7 +5,7 @@ const envSchema = yup.object({
     .string()
     .oneOf(['development', 'production', 'test'])
     .default('production'),
-  PORT: yup.number().default(3000),
+  PORT: yup.number().default(3333),
   DATABASE_URL: yup.string().required(),
 })
 
