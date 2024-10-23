@@ -20,13 +20,14 @@ export class UpdateDriverUseCase {
     uuid,
     data,
   }: IUpdateDriverRequest): Promise<IUpdateDriverResponse> {
-    const DriverBeforeUpdate = await this.driverRepository.getDriverByUuid(uuid)
+    const driverBeforeUpdate = await this.driverRepository.getDriverByUuid(uuid)
 
-    DriverBeforeUpdate.name = data.name || DriverBeforeUpdate.name
-    DriverBeforeUpdate.tagAccess =
-      data.tagAccess || DriverBeforeUpdate.tagAccess
+    driverBeforeUpdate.name = data.name || driverBeforeUpdate.name
+    driverBeforeUpdate.tagAccess =
+      data.tagAccess || driverBeforeUpdate.tagAccess
+    driverBeforeUpdate.updatedAt = new Date()
 
-    const driver = await this.driverRepository.save(DriverBeforeUpdate)
+    const driver = await this.driverRepository.save(driverBeforeUpdate)
 
     return { driver }
   }

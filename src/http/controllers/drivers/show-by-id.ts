@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { KnexDriverRepository } from '../../../repositories/knex/knex-driver-repository'
-import { GetDriverByIdUseCase } from '../../../use-cases/drivers/get-driver-by-id'
+import { GetDriverByIdUseCase } from '../../../use-cases/drivers/get-driver-by-id-use-case'
 
 export async function showByUuid(request: FastifyRequest, reply: FastifyReply) {
   const getDriverByUuidParamsSchema = yup.object({

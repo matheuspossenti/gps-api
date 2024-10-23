@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { KnexVehicleRepository } from '../../../repositories/knex/knex-vehicle-repository'
-import { DeleteVehicleUseCase } from '../../../use-cases/vehicles/delete-vehicle'
+import { DeleteVehicleUseCase } from '../../../use-cases/vehicles/delete-vehicle-use-case'
 
 export async function deleteVehicle(
   request: FastifyRequest,

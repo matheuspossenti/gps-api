@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { KnexDriverRepository } from '../../../repositories/knex/knex-driver-repository'
-import { CreateDriverUseCase } from '../../../use-cases/drivers/create-driver'
+import { CreateDriverUseCase } from '../../../use-cases/drivers/create-driver-use-case'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createDriverBodySchema = yup.object({

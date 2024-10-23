@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
-import { GetDriversUseCase } from '../../../use-cases/drivers/get-drivers'
+import { GetDriversUseCase } from '../../../use-cases/drivers/get-drivers-use-case'
 import { KnexDriverRepository } from '../../../repositories/knex/knex-driver-repository'
 
 export async function showAll(

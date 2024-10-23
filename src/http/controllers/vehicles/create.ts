@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { KnexVehicleRepository } from '../../../repositories/knex/knex-vehicle-repository'
-import { CreateVehicleUseCase } from '../../../use-cases/vehicles/create-vehicle'
+import { CreateVehicleUseCase } from '../../../use-cases/vehicles/create-vehicle-use-case'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createVehicleBodySchema = yup.object({

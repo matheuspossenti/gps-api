@@ -8,7 +8,6 @@ interface ICreatePassengerRequest {
   biometryTemplate1: string
   biometryTemplate2: string
   biometryTemplate3: string
-  uuidVehicleAuthorized: string
 }
 
 interface ICreatePassengerResponse {

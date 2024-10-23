@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import * as yup from 'yup'
 import { KnexDriverRepository } from '../../../repositories/knex/knex-driver-repository'
-import { DeleteDriverUseCase } from '../../../use-cases/drivers/delete-driver'
+import { DeleteDriverUseCase } from '../../../use-cases/drivers/delete-driver-use-case'
 
 export async function deleteDriver(
   request: FastifyRequest,

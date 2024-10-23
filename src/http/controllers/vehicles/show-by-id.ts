@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { KnexVehicleRepository } from '../../../repositories/knex/knex-vehicle-repository'
-import { GetVehicleByIdUseCase } from '../../../use-cases/vehicles/get-vehicle-by-id'
+import { GetVehicleByIdUseCase } from '../../../use-cases/vehicles/get-vehicle-by-id-use-case'
 import * as yup from 'yup'
 
 export async function showByUuid(request: FastifyRequest, reply: FastifyReply) {
