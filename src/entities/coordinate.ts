@@ -5,7 +5,7 @@ export type Coordinate = {
   pontoCardeal: string
   driverUuid: string
   vehicleUuid: string
-  created_at: Date
-  updated_at: Date
-  deleted_at: Date | null
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
 }
