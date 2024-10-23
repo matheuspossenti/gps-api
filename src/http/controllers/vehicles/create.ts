@@ -5,9 +5,9 @@ import { CreateVehicleUseCase } from '../../../use-cases/vehicles/create-vehicle
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createVehicleBodySchema = yup.object({
-    name: yup.string().required('Nome é um campo obrigátorio'),
-    brand: yup.string().required(''),
-    model: yup.string().required(''),
+    name: yup.string().required('Name is a required field'),
+    brand: yup.string().required('Brand is a required field'),
+    model: yup.string().required('Model is a required field'),
   })
 
   const { name, brand, model } = await createVehicleBodySchema.validate(
