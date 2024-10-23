@@ -1,4 +1,4 @@
-import type { Coordinate } from '../../entities/coordinate'
+import type { Coordinate } from '@/entities/coordinate'
 import type { ICoordinateRepository } from '../coordinate-repository'
 
 export class InMemoryCoordinatesRepository implements ICoordinateRepository {

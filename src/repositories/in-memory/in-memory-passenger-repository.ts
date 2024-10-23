@@ -1,4 +1,4 @@
-import type { Passenger } from '../../entities/passenger'
+import type { Passenger } from '@/entities/passenger'
 import type { IPassengerRepository } from '../passenger-repository'
 
 export class InMemoryPassengersRepository implements IPassengerRepository {

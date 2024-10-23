@@ -2,13 +2,11 @@ import fastify from 'fastify'
 import v1Routes from './routes'
 import * as yup from 'yup'
 import { env } from './env'
-import fastifyJwt from '@fastify/jwt'
+import { verifyToken } from './http/middlewares/verify-token'
 
 export const app = fastify()
 
-app.register(fastifyJwt, {
-  secret: env.JWT_SECRET,
-})
+app.addHook('preHandler', verifyToken)
 
 v1Routes.forEach((route) => {
   app.register(route.route, { prefix: route.path })
