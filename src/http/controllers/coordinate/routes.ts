@@ -1,7 +1,7 @@
 import type { FastifyInstance } from 'fastify'
+import { create } from './create'
 import { showAll } from './show-all'
 import { showByUuid } from './show-by-id'
-import { create } from './create'
 
 export async function accessRoutes(app: FastifyInstance) {
   app.get('/', showAll)
