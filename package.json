@@ -23,6 +23,7 @@
     "vitest": "^2.1.2"
   },
   "dependencies": {
+    "@fastify/jwt": "^9.0.1",
     "dotenv": "^16.4.5",
     "fastify": "^5.0.0",
     "knex": "^3.1.0",

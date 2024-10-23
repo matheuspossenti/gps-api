@@ -5,6 +5,7 @@ const envSchema = yup.object({
     .string()
     .oneOf(['development', 'production', 'test'])
     .default('production'),
+  JWT_SECRET: yup.string().required(),
   PORT: yup.number().default(3333),
   DATABASE_URL: yup.string().required(),
 })
