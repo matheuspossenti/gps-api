@@ -1,5 +1,5 @@
 export type Passenger = {
-  uuid: string
+  uuid?: string
   name: string
   tagAccess: string
   biometryTemplate1: string
