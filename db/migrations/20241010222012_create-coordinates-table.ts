@@ -7,12 +7,12 @@ export async function up(knex: Knex): Promise<void> {
     table.float('longitude').notNullable()
     table.string('pontoCardeal').notNullable()
     table
-      .uuid('vehicleId')
+      .uuid('vehicleUuid')
       .references('uuid')
       .inTable('vehicles')
       .onDelete('RESTRICT')
     table
-      .uuid('driverId')
+      .uuid('driverUuid')
       .references('uuid')
       .inTable('drivers')
       .onDelete('RESTRICT')

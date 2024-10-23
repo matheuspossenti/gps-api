@@ -3,6 +3,7 @@ import { vehicleRoutes } from './http/controllers/vehicles/routes'
 import { driverRoutes } from './http/controllers/drivers/routes'
 import { passengerRoutes } from './http/controllers/passengers/routes'
 import { accessRoutes } from './http/controllers/access/routes'
+import { coordinateRoutes } from './http/controllers/coordinate/routes'
 
 interface IRoute {
   path: string

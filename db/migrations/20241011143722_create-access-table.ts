@@ -4,19 +4,19 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable('access', (table) => {
     table.uuid('uuid').primary()
     table
-      .uuid('driverId')
+      .uuid('driverUuid')
       .references('uuid')
       .inTable('drivers')
       .onDelete('RESTRICT')
       .notNullable()
     table
-      .uuid('vehicleId')
+      .uuid('vehicleUuid')
       .references('uuid')
       .inTable('vehicles')
       .onDelete('RESTRICT')
       .notNullable()
     table
-      .uuid('passengerId')
+      .uuid('passengerUuid')
       .references('uuid')
       .inTable('passengers')
       .onDelete('RESTRICT')

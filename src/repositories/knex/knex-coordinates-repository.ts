@@ -22,8 +22,8 @@ export class KnexCoordinatesRepository implements ICoordinateRepository {
         latitude: coordinate.latitude,
         longitude: coordinate.longitude,
         pontoCardeal: coordinate.pontoCardeal,
-        driverId: coordinate.driverUuid,
-        vehicleId: coordinate.vehicleUuid,
+        driverUuid: coordinate.driverUuid,
+        vehicleUuid: coordinate.vehicleUuid,
       })
       .returning('*')
 
