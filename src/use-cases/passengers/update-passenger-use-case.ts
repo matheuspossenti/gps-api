@@ -1,5 +1,6 @@
 import type { Passenger } from '../../entities/passenger'
 import type { IPassengerRepository } from '../../repositories/passenger-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 interface IUpdatePassengerRequest {
   uuid: string
@@ -25,6 +26,10 @@ export class UpdatePassengerUseCase {
   }: IUpdatePassengerRequest): Promise<IUpdatePassengerResponse> {
     const passengerBeforeUpdate =
       await this.passengerRepository.getPassengerByUuid(uuid)
+
+    if (!passengerBeforeUpdate) {
+      throw new ResourceNotFoundError()
+    }
 
     passengerBeforeUpdate.name = data.name || passengerBeforeUpdate.name
     passengerBeforeUpdate.tagAccess =

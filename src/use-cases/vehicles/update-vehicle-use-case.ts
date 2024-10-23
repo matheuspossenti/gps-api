@@ -1,5 +1,6 @@
 import type { Vehicle } from '../../entities/vehicle'
 import type { IVehicleRepository } from '../../repositories/vehicle-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 interface IUpdateVehicleRequest {
   uuid: string
@@ -23,6 +24,10 @@ export class UpdateVehicleUseCase {
   }: IUpdateVehicleRequest): Promise<IUpdateVehicleResponse> {
     const vehicleBeforeUpdate =
       await this.vehicleRepository.getVehicleByUuid(uuid)
+
+    if (!vehicleBeforeUpdate) {
+      throw new ResourceNotFoundError()
+    }
 
     vehicleBeforeUpdate.name = data.name || vehicleBeforeUpdate.name
     vehicleBeforeUpdate.model = data.model || vehicleBeforeUpdate.model

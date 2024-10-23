@@ -5,7 +5,7 @@ import * as yup from 'yup'
 
 export async function showByUuid(request: FastifyRequest, reply: FastifyReply) {
   const getVehicleByUuidParamsSchema = yup.object({
-    uuid: yup.string().required().uuid('Não é um ID válido'),
+    uuid: yup.string().required().uuid('Invalid UUID.'),
   })
 
   const { uuid } = await getVehicleByUuidParamsSchema.validate(request.params)

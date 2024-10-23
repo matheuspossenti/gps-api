@@ -1,5 +1,6 @@
 import type { Driver } from '../../entities/driver'
 import type { IDriverRepository } from '../../repositories/driver-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 interface IDeleteDriverRequest {
   uuid: string
@@ -16,6 +17,10 @@ export class DeleteDriverUseCase {
     uuid,
   }: IDeleteDriverRequest): Promise<IDeleteDriverResponse> {
     const driverBeforeUpdate = await this.driverRepository.getDriverByUuid(uuid)
+
+    if (!driverBeforeUpdate) {
+      throw new ResourceNotFoundError()
+    }
 
     driverBeforeUpdate.deletedAt = new Date()
 

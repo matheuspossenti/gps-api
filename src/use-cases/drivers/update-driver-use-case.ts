@@ -1,5 +1,6 @@
 import type { Driver } from '../../entities/driver'
 import type { IDriverRepository } from '../../repositories/driver-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 interface IUpdateDriverRequest {
   uuid: string
@@ -21,6 +22,10 @@ export class UpdateDriverUseCase {
     data,
   }: IUpdateDriverRequest): Promise<IUpdateDriverResponse> {
     const driverBeforeUpdate = await this.driverRepository.getDriverByUuid(uuid)
+
+    if (!driverBeforeUpdate) {
+      throw new ResourceNotFoundError()
+    }
 
     driverBeforeUpdate.name = data.name || driverBeforeUpdate.name
     driverBeforeUpdate.tagAccess =

@@ -5,7 +5,7 @@ import { GetDriverByIdUseCase } from '../../../use-cases/drivers/get-driver-by-i
 
 export async function showByUuid(request: FastifyRequest, reply: FastifyReply) {
   const getDriverByUuidParamsSchema = yup.object({
-    uuid: yup.string().required().uuid('Não é um ID válido'),
+    uuid: yup.string().required().uuid('Invalid UUID'),
   })
 
   const { uuid } = await getDriverByUuidParamsSchema.validate(request.params)
