@@ -1,10 +1,12 @@
-import knex from 'knex'
-import type { Coordinate } from '../../entities/coordinate'
-import type { ICoordinateRepository } from '../coordinate-repository'
+import { knex } from '../../database'
+import { Coordinate } from '../../entities/coordinate'
+import { ICoordinateRepository } from '../coordinate-repository'
 
 export class KnexCoordinatesRepository implements ICoordinateRepository {
   async getAll(): Promise<Coordinate[]> {
-    const coordinates = await knex('coordinates').select('*')
+    const coordinates = await knex('coordinates')
+      .whereNull('deletedAt')
+      .select('*')
 
     return coordinates
   }
@@ -24,6 +26,9 @@ export class KnexCoordinatesRepository implements ICoordinateRepository {
         pontoCardeal: coordinate.pontoCardeal,
         driverUuid: coordinate.driverUuid,
         vehicleUuid: coordinate.vehicleUuid,
+        createdAt: coordinate.createdAt,
+        updatedAt: coordinate.updatedAt,
+        deletedAt: coordinate.deletedAt,
       })
       .returning('*')
 

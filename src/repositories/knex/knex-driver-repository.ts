@@ -1,6 +1,6 @@
 import { knex } from '../../database'
 import { Driver } from '../../entities/driver'
-import type { IDriverRepository } from '../driver-repository'
+import { IDriverRepository } from '../driver-repository'
 
 export class KnexDriverRepository implements IDriverRepository {
   async getAll(): Promise<Driver[]> {
