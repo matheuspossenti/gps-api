@@ -21,16 +21,14 @@ describe('Update Driver Use Case', () => {
       deletedAt: null,
     })
 
-    await sut.execute({
+    const { driver } = await sut.execute({
       uuid: '1',
       data: {
-        name: 'John',
+        name: 'John Doe Updated',
         tagAccess: 'A1B2C3',
       },
     })
 
-    const driver = await driverRepository.getDriverByUuid('1')
-
-    expect(driver?.name).toBe('John')
+    expect(driver?.name).toBe('John Doe Updated')
   })
 })
