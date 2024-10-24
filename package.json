@@ -8,7 +8,9 @@
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
     "lint": "eslint src --ext .ts --fix",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "vitest run --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http"
   },
   "keywords": [],
   "author": "",
