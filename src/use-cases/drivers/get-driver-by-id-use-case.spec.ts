@@ -1,17 +1,17 @@
 import { InMemoryDriversRepository } from '@/repositories/in-memory/in-memory-driver-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
-import { GetDriversUseCase } from './get-drivers-use-case'
+import { GetDriverByIdUseCase } from './get-driver-by-id-use-case'
 
 let driverRepository: InMemoryDriversRepository
-let sut: GetDriversUseCase
+let sut: GetDriverByIdUseCase
 
-describe('Driver Use Case', () => {
+describe('Get Driver By Id Use Case', () => {
   beforeEach(() => {
     driverRepository = new InMemoryDriversRepository()
-    sut = new GetDriversUseCase(driverRepository)
+    sut = new GetDriverByIdUseCase(driverRepository)
   })
 
-  it('should be able to get all drivers', async () => {
+  it('should be able to get a driver by id', async () => {
     await driverRepository.save({
       uuid: '1',
       name: 'John Doe',
@@ -30,9 +30,10 @@ describe('Driver Use Case', () => {
       deletedAt: null,
     })
 
-    const { drivers } = await sut.execute()
+    const { driver } = await sut.execute({
+      uuid: '1',
+    })
 
-    expect(drivers).toHaveLength(2)
-    expect(drivers[0].name).toBe('John Doe')
+    expect(driver.name).toBe('John Doe')
   })
 })
