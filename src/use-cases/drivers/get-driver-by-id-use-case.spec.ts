@@ -1,6 +1,7 @@
 import { InMemoryDriversRepository } from '@/repositories/in-memory/in-memory-driver-repository'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { GetDriverByIdUseCase } from './get-driver-by-id-use-case'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 let driverRepository: InMemoryDriversRepository
 let sut: GetDriverByIdUseCase
@@ -35,5 +36,13 @@ describe('Get Driver By Id Use Case', () => {
     })
 
     expect(driver.name).toBe('John Doe')
+  })
+
+  it('should not be able to get a driver by id if it does not exist', async () => {
+    expect(() =>
+      sut.execute({
+        uuid: '1',
+      }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
