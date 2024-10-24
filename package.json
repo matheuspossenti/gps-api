@@ -7,10 +7,10 @@
     "dev": "tsx watch --env-file .env src/server.ts",
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
     "lint": "eslint src --ext .ts --fix",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:e2e": "vitest run --dir src/http",
-    "test:e2e:watch": "vitest --dir src/http"
+    "test": "vitest run unit",
+    "test:watch": "vitest unit",
+    "test:e2e": "vitest run e2e --dir src/http",
+    "test:e2e:watch": "vitest e2e --dir src/http"
   },
   "keywords": [],
   "author": "",
