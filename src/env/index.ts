@@ -1,4 +1,11 @@
+import { config } from 'dotenv'
 import * as yup from 'yup'
+
+if (process.env.NODE_ENV === 'test') {
+  config({ path: './.env.test' })
+} else {
+  config()
+}
 
 const envSchema = yup.object({
   NODE_ENV: yup
