@@ -20,7 +20,7 @@ export async function deletePassenger(
     uuid,
   })
 
-  return reply.status(201).send({
+  return reply.status(200).send({
     passenger,
   })
 }

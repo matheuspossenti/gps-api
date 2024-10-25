@@ -1,17 +1,19 @@
 import { env } from '@/env'
-import type { FastifyReply, FastifyRequest } from 'fastify'
+import { ForbiddenError } from '@/errors/ForbiddenError'
+import { UnauthorizedError } from '@/errors/UnauthorizedError'
+import type { FastifyRequest } from 'fastify'
 
 export async function verifyToken(
   request: FastifyRequest,
-  reply: FastifyReply,
+  // reply: FastifyReply,
 ) {
-  try {
-    const token = request.headers?.authorization?.split(' ')[1]
+  const token = request.headers?.authorization?.split(' ')[1]
 
-    if (token !== env.TOKEN) {
-      throw new Error('Unauthorized.')
-    }
-  } catch (error) {
-    return reply.status(401).send({ message: 'Unauthorized.' })
+  if (!token) {
+    throw new UnauthorizedError('Unauthorized.')
+  }
+
+  if (token !== env.TOKEN) {
+    throw new ForbiddenError('Forbidden.')
   }
 }

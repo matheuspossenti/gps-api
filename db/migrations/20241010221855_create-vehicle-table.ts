@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('model').notNullable()
     table.string('brand').notNullable()
     table.timestamps(false, true, true)
-    table.timestamp('deletedAt').defaultTo(null).nullable()
+    table.dateTime('deletedAt').defaultTo(null).nullable()
   })
 }
 
