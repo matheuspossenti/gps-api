@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '@/app'
 import { env } from '@/env'
 
-describe('Create Access (e2e)', () => {
+describe('Get Accesss (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -12,7 +12,7 @@ describe('Create Access (e2e)', () => {
     await app.close()
   })
 
-  it('should create a access', async () => {
+  it('should get all accesss', async () => {
     const driverResponse = await request(app.server)
       .post('/v1/drivers')
       .set('Authorization', `Bearer ${env.TOKEN}`)
@@ -41,7 +41,7 @@ describe('Create Access (e2e)', () => {
         biometryTemplate3: '123456',
       })
 
-    const response = await request(app.server)
+    await request(app.server)
       .post('/v1/access')
       .set('Authorization', `Bearer ${env.TOKEN}`)
       .send({
@@ -53,6 +53,22 @@ describe('Create Access (e2e)', () => {
         longitude: 1,
       })
 
-    expect(response.statusCode).toEqual(201)
+    const accessResponse = await request(app.server)
+      .post('/v1/access')
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+      .send({
+        driverUuid: `${driverResponse.body.uuid}`,
+        vehicleUuid: `${vehicleResponse.body.uuid}`,
+        passengerUuid: `${passengerResponse.body.uuid}`,
+        methodUsed: 'Face',
+        latitude: 1,
+        longitude: 1,
+      })
+
+    const response = await request(app.server)
+      .get(`/v1/access/${accessResponse.body.uuid}`)
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+
+    expect(response.statusCode).toEqual(200)
   })
 })
