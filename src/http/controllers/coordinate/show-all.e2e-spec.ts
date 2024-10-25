@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '@/app'
 import { env } from '@/env'
 
-describe('Create Coordinate (e2e)', () => {
+describe('Get Coordinates (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -12,7 +12,7 @@ describe('Create Coordinate (e2e)', () => {
     await app.close()
   })
 
-  it('should create a coordinate', async () => {
+  it('should get all coordinates', async () => {
     const driverResponse = await request(app.server)
       .post('/v1/drivers')
       .set('Authorization', `Bearer ${env.TOKEN}`)
@@ -30,7 +30,7 @@ describe('Create Coordinate (e2e)', () => {
         brand: 'Volkswagen',
       })
 
-    const response = await request(app.server)
+    await request(app.server)
       .post('/v1/coordinates')
       .set('Authorization', `Bearer ${env.TOKEN}`)
       .send({
@@ -41,6 +41,22 @@ describe('Create Coordinate (e2e)', () => {
         vehicleUuid: `${vehicleResponse.body.uuid}`,
       })
 
-    expect(response.statusCode).toEqual(201)
+    await request(app.server)
+      .post('/v1/coordinates')
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+      .send({
+        latitude: 2,
+        longitude: 2,
+        pontoCardeal: 'N',
+        driverUuid: `${driverResponse.body.uuid}`,
+        vehicleUuid: `${vehicleResponse.body.uuid}`,
+      })
+
+    const response = await request(app.server)
+      .get('/v1/coordinates')
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+
+    expect(response.body.length).toBeGreaterThan(1)
+    expect(response.statusCode).toEqual(200)
   })
 })
