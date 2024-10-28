@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.uuid('uuid').primary()
     table.string('name').notNullable()
     table.string('tagAccess').notNullable()
-    table.timestamps(true, true, true)
+    table.timestamps(false, true, true)
     table.timestamp('deletedAt').defaultTo(null).nullable()
   })
 }

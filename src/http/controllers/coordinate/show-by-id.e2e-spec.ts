@@ -58,4 +58,36 @@ describe('Get Coordinates (e2e)', () => {
 
     expect(response.statusCode).toEqual(200)
   })
+
+  it('should not get a coordinate with invalid uuid', async () => {
+    const response = await request(app.server)
+      .get('/v1/coordinates/123456')
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+
+    expect(response.statusCode).toEqual(400)
+  })
+
+  it('should not get a coordinate that doesnt exist', async () => {
+    const response = await request(app.server)
+      .get('/v1/coordinates/8b8f06b7-a8bb-4785-af30-08dfcbdd2462')
+      .set('Authorization', `Bearer ${env.TOKEN}`)
+
+    expect(response.statusCode).toEqual(404)
+  })
+
+  it('should not get a coordinate without token', async () => {
+    const response = await request(app.server).get(
+      '/v1/coordinates/8b8f06b7-a8bb-4785-af30-08dfcbdd2462',
+    )
+
+    expect(response.statusCode).toEqual(401)
+  })
+
+  it('should not get a coordinate with invalid token', async () => {
+    const response = await request(app.server)
+      .get('/v1/coordinates/8b8f06b7-a8bb-4785-af30-08dfcbdd2462')
+      .set('Authorization', 'Bearer invalid')
+
+    expect(response.statusCode).toEqual(403)
+  })
 })

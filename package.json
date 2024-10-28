@@ -8,8 +8,8 @@
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
     "lint": "eslint src --ext .ts --fix",
     "test": "vitest run --config ./vite.config.ts",
-    "test:watch": "vitest",
-    "test:e2e": "vitest run e2e --config ./vite.config.e2e.ts",
+    "test:watch": "tsx vitest",
+    "test:e2e": "vitest run e2e --config ./vite.config.e2e.ts -- poolOptions.threads.singleThread",
     "test:e2e:watch": "vitest e2e ",
     "test:coverage": "vitest --coverage"
   },
@@ -27,10 +27,11 @@
     "tsx": "^4.19.1",
     "typescript": "^5.6.3",
     "vite-tsconfig-paths": "^5.0.1",
-    "vitest": "^2.1.3"
+    "vitest": "^2.1.4"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
+    "esm": "^3.2.25",
     "fastify": "^5.0.0",
     "knex": "^3.1.0",
     "sqlite3": "^5.1.7",

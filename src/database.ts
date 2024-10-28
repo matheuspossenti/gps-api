@@ -11,6 +11,7 @@ export const config: Knex.Config = {
   migrations: {
     extension: 'ts',
     directory: './db/migrations',
+    loadExtensions: ['.ts'],
   },
   pool: {
     afterCreate: (conn: Database, done: (err: Error | null) => void) => {

@@ -59,4 +59,18 @@ describe('Get Coordinates (e2e)', () => {
     expect(response.body.length).toBeGreaterThan(1)
     expect(response.statusCode).toEqual(200)
   })
+
+  it('should not get all coordinates without token', async () => {
+    const response = await request(app.server).get('/v1/coordinates')
+
+    expect(response.statusCode).toEqual(401)
+  })
+
+  it('should not get all coordinates with invalid token', async () => {
+    const response = await request(app.server)
+      .get('/v1/coordinates')
+      .set('Authorization', 'Bearer invalid-token')
+
+    expect(response.statusCode).toEqual(403)
+  })
 })

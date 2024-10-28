@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('biometryTemplate2').notNullable()
     table.string('biometryTemplate3').notNullable()
     table.uuid('uuidVehicleAuthorized').notNullable()
-    table.timestamps(true, true, true)
+    table.timestamps(false, true, true)
     table.timestamp('deletedAt').defaultTo(null).nullable()
   })
 }

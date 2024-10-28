@@ -10,14 +10,14 @@ export async function up(knex: Knex): Promise<void> {
       .uuid('vehicleUuid')
       .references('uuid')
       .inTable('vehicles')
-      .onDelete('RESTRICT')
+      .onDelete('CASCADE')
     table
       .uuid('driverUuid')
       .references('uuid')
       .inTable('drivers')
-      .onDelete('RESTRICT')
+      .onDelete('CASCADE')
 
-    table.timestamps(true, true, true)
+    table.timestamps(false, true, true)
     table.timestamp('deletedAt').defaultTo(null).nullable()
   })
 }
